@@ -1,0 +1,23 @@
+{
+  "name": "test-coveralls",
+  "version": "1.0.0",
+  "description": "Coveralls test.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive -b -t 30000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dptole/test-coveralls.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dptole/test-coveralls/issues"
+  },
+  "homepage": "https://github.com/dptole/test-coveralls#readme",
+  "devDependencies": {
+    "mocha": "^5.1.1",
+    "should": "^13.2.1"
+  }
+}

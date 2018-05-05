@@ -1,0 +1,4 @@
+Coveralls test
+==============
+
+Testing coveralls.
