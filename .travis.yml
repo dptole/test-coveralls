@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - "8.9"
 before_install:
-  npm i -D
+  - npm i -D
 script:
-  - npm t
+  - npm test-ci
+after_script:
+  - npm i coveralls@3.0.1
+  - cat ./coverage/lcov.info | coveralls

@@ -4,7 +4,8 @@
   "description": "Coveralls test.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive -b -t 30000"
+    "test-ci": "istanbul cover _mocha --report lcovonly -- --recursive -b -t 30000 --check-leaks",
+    "test": "mocha --recursive -b -t 30000 --check-leaks"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
   },
   "homepage": "https://github.com/dptole/test-coveralls#readme",
   "devDependencies": {
-    "mocha": "^5.1.1",
-    "should": "^13.2.1"
+    "istanbul": "0.4.5",
+    "mocha": "5.1.1",
+    "should": "13.2.1"
   }
 }
