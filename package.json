@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/dptole/test-coveralls.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "dptole <danillo.paiva.toledo@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dptole/test-coveralls/issues"
   },
