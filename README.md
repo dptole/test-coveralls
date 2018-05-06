@@ -8,9 +8,9 @@ Test coveralls
 
 Testing coveralls.
 
-Lessons learned by when creating this repo:
+Lessons learned when creating this repo:
 
-- Code coverage helps to increase the stability of production environments.
+- [Code coverage][code-coverage-url] helps devs increase the stability of production code.
 - Companies will run from it like the devil.
 
 How to
@@ -18,13 +18,17 @@ How to
 
 The file `index.js` contains random code pretending to be an actual application with lots of functionalities. You will probably need to expose most of your functions or at least make sure that there is a way to hit all lines of the hidden functions.
 
-The big 3 building blocks are: `Tests`, `Travis` and `Coveralls`.
+The big 3 building blocks are:
+
+- `Tests`
+- `Travis`
+- `Coveralls`
 
 ## Tests
 
-In order to have code coverage in your repo you need to have integration tests implemented.
+In order to have code coverage in your repo you need to have [integration tests][it-url] implemented.
 
-> Your tests should not send HTTP requests to a local server. By doing so you are not testing files in the eyes of code coverage, you are only sending HTTP requests to some local server.
+> Your tests should not send HTTP requests to a local server. By doing so you are not testing files in the eyes of code coverage, you are only sending HTTP requests.
 
 ### Tests setup
 
@@ -34,15 +38,15 @@ In this repo I used [mocha][mocha-url] and [should][should-url] to run my tests.
 npm i -D mocha should
 ```
 
-Inside the `test/app/` folder I created one test file for each function exported by `index.js`: sum, subtract, multiply and divide. Every function has a exception case for which tests were created.
+Inside the `test/app/` folder I created one test file for each function exported by `index.js`: sum, subtract, multiply and divide. Every function has a exception case for which tests were also created.
 
 ## [Travis][travis-url]
 
-You must logging into travis, giving travis some permissions so that it can be notified of your commits and run the builds, that can be revoked [here][revoke-application-permission-url] (change the username).
+You must log in to travis, give it some permissions so that it can be notified of your commits and run the builds (that can be revoked [here][revoke-application-permission-url] (change the username)).
 
-After that you need to activate CI for a given repo. In my case I had to go [here][travis-ci-activate-repo] but in your case the username will not be the same.
+After that you need to activate CI for a given repo. In my case I had to go [here][travis-ci-activate-repo] (change the username).
 
-I'd recommend changing the default configuration, [here][travis-ci-settings-repo] (change the username), switching `Build only if .travis.yml is present` from `OFF` to `ON`. Maybe you should set `Build pushed pull requests` to `OFF`.
+I'd recommend changing the default configuration, [here][travis-ci-settings-repo] (change the username), switching `Build only if .travis.yml is present` from `OFF` to `ON`. Maybe you should set `Build pushed pull requests` to `OFF` depending on your projects' needs.
 
 ### Travis config `.travis.yml`
 
@@ -67,23 +71,23 @@ Where
 - `language:` Just refers to the programming language which your project was built.
 - `node_js:` Here you could specify more than one version of the language. By using Nodejs Travis uses [nvm][nvm-url], install and uses Nodejs version `8.9`.
 - `before_install:` This command is run before `npm install`, which would download the dependencies for my project. Luckly I don't have any dependency, just dev dependencies that are installed using `npm i -D`. The dev dependencies will install `mocha` and `should`.
-- `script:` Here I have the list of shell commands that will actually run my integration tests and generate the [lcov][lcov-url] file. The command `npm run test-ci` will actually run `./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --recursive -b -t 30000 --check-leaks`.
-  - This command will be divided into 2 parts
+- `script:` Here I have the list of shell commands that will actually run my integration tests and generate the [lcov][lcov-url] file. The command `npm run test-ci` will actually run `./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --recursive -b -t 30000 --check-leaks` (can be found in `package.json`).
+  - This command will be divided into 2 parts:
     - `./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly`
-      - istanbul will run the code coverage using the comamnd _mocha, which will automatically run my tests, and I passed the option `--report lcovonly` so that istanbul generates the coverage/lconf.info file. This file will be used by coveralls later on.
+      - istanbul will run the code coverage using the command  `_mocha`, which will automatically run my tests because there is a folder named `test`. I passed the option `--report lcovonly` so that istanbul generates the `lconf.info` file too.
     - `--recursive -b -t 30000 --check-leaks`
-      - These are the arguments sent to `./node_modules/.bin/_mocha`
-        - `--recursive` Search inside the subfolders for `*.js` that will test my application. This is used to better organize the tests.
-        - `-b` Stop the integration tests as soon as an error is thrown. The default behavior for mocha is to run all the tests and then display the errors and exit with a non-zero error code.
-        - `-t 30000` This tells mocha to wait 30 seconds before exiting with a timeout error. This gives more time for my tests to run. The default is too short (2 seconds)
-        - `--check-leaks` Check for global variable leaks. Sometimes we forget unused variables when coding.
-- `after_script:` If all tests passed istanbul will generate a folder `coverage/` with some information that will be used later on
+      - These are the arguments sent to `./node_modules/.bin/_mocha`.
+        - `--recursive` Search for `*.js` inside of `test/` and its subfolders. This is used to better organize the tests.
+        - `-b` Stop the integration tests as soon as an error is encountered. The default behavior for mocha is to run all the tests and then display the errors, exiting with a non-zero error code.
+        - `-t 30000` This tells mocha to wait 30 seconds before exiting with a timeout error. This gives more time for my tests to run. The default timeout is just 2 seconds.
+        - `--check-leaks` Check for global variable leaks. Sometimes we forget unused variables while coding.
+- `after_script:` If all tests passed istanbul will generate a folder `coverage/` with some information that will be used later on.
   - `npm i coveralls@3.0.1` This command will install coveralls in the travis VM.
   - `cat ./coverage/lcov.info | coveralls`. Asks coveralls to analyze the tests code coverage using the file `lcov.info` generated by istanbul.
 
 ## [Coveralls][coveralls-url]
 
-You must logging into [coveralls][coveralls-url], giving it some permissions so that it can be notified of your commits and run the code analysis.
+You must log in to [coveralls][coveralls-url], giving it some permissions so that it can list your repos, for activation, and run the code analysis
 
 After that you must also activate the repo on which the code coverage will be run. You can do so [here][coveralls-add-repo-url]. By using coveralls together with travis you don't need any further configuration for this to work.
 
@@ -131,4 +135,9 @@ License
 [coveralls]: https://coveralls.io/github/dptole/test-coveralls?branch=master
 [coveralls-url]: https://coveralls.io/
 [coveralls-add-repo-url]: https://coveralls.io/repos/new
+
+[it-url]: https://en.wikipedia.org/wiki/Integration_testing
+
 [LICENSE]: LICENSE
+
+[code-coverage-url]: https://en.wikipedia.org/wiki/Code_coverage
