@@ -124,7 +124,7 @@ License
   [MIT][LICENSE]
 
 [travis-url]: https://travis-ci.org/
-[travis-ci]: https://travis-ci.org/dptole/test-coveralls/builds/375531117
+[travis-ci]: https://travis-ci.org/dptole/test-coveralls/builds
 [travis-ci-badge]: https://img.shields.io/travis/dptole/test-coveralls.svg
 [travis-ci-activate-repo]: https://travis-ci.org/profile/dptole
 [travis-ci-settings-repo]: https://travis-ci.org/dptole/test-coveralls/settings
