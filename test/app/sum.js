@@ -11,6 +11,13 @@ describe('Sum', function() {
     )
   })
 
+  it('should sum 12 + 3 === 6', function() {
+    should.strictEqual(
+      app.sum(12, 3),
+      6
+    )
+  })
+
   it('should sum 0 + 5 === 5', function() {
     should.strictEqual(
       app.sum(0, 5),

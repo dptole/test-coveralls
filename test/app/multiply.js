@@ -11,6 +11,13 @@ describe('Multiplication', function() {
     )
   })
 
+  it('should multiply "x" * 3 === 0', function() {
+    should.strictEqual(
+      app.multiply('x', 3),
+      0
+    )
+  })
+
   it('should multiply 0 * 5 === 0', function() {
     should.strictEqual(
       app.multiply(0, 5),

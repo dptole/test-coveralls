@@ -14,14 +14,14 @@ const app = {
   },
 
   multiply: (a, b) => {
-    if(Number.isNaN(a))
+    if(!Number.isFinite(a))
       a = 0
     return a * b
   },
 
   divide: (a, b) => {
     if(b === 0)
-      throw new Error('Thou shalt not divide by zero!')
+      throw new TypeError('Thou shalt not divide by zero!')
     return a / b
   }
 }
