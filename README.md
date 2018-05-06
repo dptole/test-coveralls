@@ -6,9 +6,10 @@ Test coveralls
   [![Issue status][gh-issues-badge]][gh-issues]
   [![Say thanks][saythanks-badge]][saythanks-to]
 
-Testing coveralls.
+I've created this repo to try and implement the most basic `test (mocha) -> build (travis) -> code coverage (coveralls)` flow possible so that I could use it in real projects in the future. Code coverage is very important if you want your builds to be more stable and reason about your code in ways you hadn't, but it should not be considered a silver bullet. You can always do better.
 
-Lessons learned when creating this repo:
+Lessons learned
+===============
 
 - [Code coverage][code-coverage-url] helps devs increase the stability of production code.
 - Companies will run from it like the devil.
@@ -74,7 +75,7 @@ Where
 - `script:` Here I have the list of shell commands that will actually run my integration tests and generate the [lcov][lcov-url] file. The command `npm run test-ci` will actually run `./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --recursive -b -t 30000 --check-leaks` (can be found in `package.json`).
   - This command will be divided into 2 parts:
     - `./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly`
-      - istanbul will run the code coverage using the command  `_mocha`, which will automatically run my tests because there is a folder named `test`. I passed the option `--report lcovonly` so that istanbul generates the `lconf.info` file too.
+      - istanbul will run the code coverage using the command  `_mocha`, which will automatically run my tests because there is a folder named `test`. I passed the option `--report lcovonly` so that istanbul generates the `coverage/lcov.info` file too.
     - `--recursive -b -t 30000 --check-leaks`
       - These are the arguments sent to `./node_modules/.bin/_mocha`.
         - `--recursive` Search for `*.js` inside of `test/` and its subfolders. This is used to better organize the tests.
@@ -101,6 +102,21 @@ https://docs.coveralls.io/javascript
 ## Travis
 
 https://docs.travis-ci.com/user/customizing-the-build/
+
+## Mocha
+
+https://mochajs.org/
+
+## Should
+
+https://shouldjs.github.io/
+
+EOF
+===
+
+Try on your own, don't copy this repo. The best way to learn is to fill the gaps in your mind between the eternal state of confusion and the understanding of a given topic possible. More often than not my gaps are not the same as your gaps and the questions you will have to ask yourself would never occur to me.
+
+Good luck! ;)
 
 License
 =======
